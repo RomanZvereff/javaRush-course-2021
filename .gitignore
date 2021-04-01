@@ -1,0 +1,4 @@
+# Ignore directories and files
+JavaRushTasks/*.log
+JavaRushTasks/.idea/
+JavaRushTasks/out/
