@@ -7,5 +7,25 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="desktop-game-engine.jar">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../lib" recursive="true" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="javafx-sdk-11.0.2">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../lib/javafx-sdk-11.0.2/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../lib/javafx-sdk-11.0.2/lib" recursive="true" />
+      </library>
+    </orderEntry>
   </component>
 </module>
