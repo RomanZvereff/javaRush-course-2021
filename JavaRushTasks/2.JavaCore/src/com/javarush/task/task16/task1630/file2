@@ -1,0 +1,2 @@
+We'll use a set of test examples with core Java classes only, and in the tests, we'll use assertions with Hamcrest matchers.
+Tests will share a common readFromInputStream method that transforms an InputStream to String for easier asserting of results

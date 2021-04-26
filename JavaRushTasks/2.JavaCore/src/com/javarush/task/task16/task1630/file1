@@ -1,0 +1,5 @@
+In this tutorial, we'll explore different ways to read from a File in Java.
+First, we'll learn how to load a file from the classpath, a URL, or from a JAR file using standard Java classes.
+Second, we'll see how to read the content with BufferedReader, Scanner, StreamTokenizer, DataInputStream, SequenceInputStream, and FileChannel. We will also discuss how to read a UTF-8 encoded file.
+Finally, we’ll explore the new techniques to load and read a file in Java 7 and Java 8.
+This article is part of the “Java – Back to Basic” series on Baeldung.
