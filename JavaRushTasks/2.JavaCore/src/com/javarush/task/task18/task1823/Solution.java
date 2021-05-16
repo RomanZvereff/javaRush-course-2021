@@ -36,7 +36,7 @@ public class Solution {
             //implement constructor body
             this.fileName = fileName;
         }
-        // implement file reading here - реализуйте чтение из файла тут
+        // implement file1 reading here - реализуйте чтение из файла тут
         @Override
         public void run() {
             try {

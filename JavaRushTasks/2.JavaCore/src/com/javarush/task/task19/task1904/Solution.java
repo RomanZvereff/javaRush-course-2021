@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class Solution {
 
     public static void main(String[] args) {
-        Path path = Paths.get("D:\\JAVA\\javaRush-course-2021\\JavaRushTasks\\2.JavaCore\\src\\com\\javarush\\task\\task19\\task1904\\file");
+        Path path = Paths.get("D:\\JAVA\\javaRush-course-2021\\JavaRushTasks\\2.JavaCore\\src\\com\\javarush\\task\\task19\\task1904\\file1");
         try {
             Scanner scanner = new Scanner(path);
             PersonScannerAdapter personScannerAdapter = new PersonScannerAdapter(scanner);
