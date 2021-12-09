@@ -12,42 +12,21 @@ import java.util.List;
 */
 
 public class Solution {
-    public static List<LineItem> lines = new ArrayList<LineItem>();
+    public static List<LineItem> lines = new ArrayList<>();
 
     public static void main(String[] args) {
-        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
-            String firstFile = bufferedReader.readLine();
-            String secondFile = bufferedReader.readLine();
-            bufferedReader.close();
 
-            List<String> list1 = new ArrayList<>(readFile(firstFile));
-            List<String> list2 = new ArrayList<>(readFile(secondFile));
-
-            int i1 = 0, i2 = 0;
-
-            while(i1 < list1.size() && i2 < list2.size()) {
-                if(list1.get(i1).equals(list2.get(i2))) {
-                    lines.add(new LineItem(Type.SAME, list1.get(i1)));
-                    i1++;
-                    i2++;
-                }else if(list1.get(i1).equals(list2.get(i2 + 1))) {
-                    lines.add(new LineItem(Type.ADDED, list2.get(i2)));
-                    i1++;
-                }else {
-                    lines.add(new LineItem(Type.REMOVED, list1.get(i1)));
-                    i2++;
-                }
-            }
-
-            for(LineItem item : lines) {
-                System.out.println(item.toString());
-            }
-        }catch(IOException e) {
-            e.printStackTrace();
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
+            List<String> firstList = readFile(bufferedReader.readLine());
+            List<String> secondList = readFile(bufferedReader.readLine());
+            compareLists(firstList, secondList);
+        } catch(IOException ex) {
+            System.out.println(ex.getMessage());
         }
+
     }
 
-    public static enum Type {
+    public enum Type {
         ADDED,        //добавлена новая строка
         REMOVED,      //удалена строка
         SAME          //без изменений
@@ -64,16 +43,70 @@ public class Solution {
 
         @Override
         public String toString() {
-            return type + " " + line;
+            return "LineItem{" +
+                    "type=" + type +
+                    ", line='" + line + '\'' +
+                    '}';
         }
     }
 
-    public static List<String> readFile(String fileName) throws IOException {
+    public static List<String> readFile(String fileName) {
         List<String> list = new ArrayList<>();
-        BufferedReader fileReader = new BufferedReader(new FileReader(fileName));
-        while(fileReader.ready()) {
-            list.add(fileReader.readLine());
+
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+            while(bufferedReader.ready()) {
+                list.add(bufferedReader.readLine());
+            }
+        } catch(IOException ex) {
+            System.out.println(ex.getMessage());
         }
+
         return list;
     }
+
+    public static void compareLists(List<String> firstList, List<String> secondList) {
+        int counter = 0;
+
+        while(firstList.size() != 0 || secondList.size() != 0) {
+            if(firstList.size() == 1 && secondList.size() > 1) {
+                if(firstList.get(counter).equals(secondList.get(counter))) {
+                    lines.add(new LineItem(Type.SAME, firstList.get(counter)));
+                    firstList.remove(counter);
+                    secondList.remove(counter);
+                    lines.add(new LineItem(Type.ADDED, secondList.get(counter)));
+                }else {
+                    lines.add(new LineItem(Type.SAME, firstList.get(counter)));
+                    lines.add(new LineItem(Type.ADDED, secondList.get(counter)));
+                    firstList.remove(counter);
+                    break;
+                }
+            } else if(firstList.size() > 1 && secondList.size() == 1) {
+                if(firstList.get(counter).equals(secondList.get(counter))) {
+                    lines.add(new LineItem(Type.SAME, firstList.get(counter)));
+                    firstList.remove(counter);
+                    secondList.remove(counter);
+                    lines.add(new LineItem(Type.ADDED, firstList.get(counter)));
+                }else {
+                    lines.add(new LineItem(Type.REMOVED, firstList.get(counter)));
+                    lines.add(new LineItem(Type.SAME, secondList.get(counter)));
+                    secondList.remove(counter);
+                    break;
+                }
+            }
+
+            if(firstList.get(counter).equals(secondList.get(counter))) {
+                lines.add(new LineItem(Type.SAME, firstList.get(counter)));
+                firstList.remove(counter);
+                secondList.remove(counter);
+            }else if(!firstList.get(counter).equals(secondList.get(counter + 1))) {
+                lines.add(new LineItem(Type.REMOVED, firstList.get(counter)));
+                firstList.remove(counter);
+            }else if(firstList.get(counter).equals(secondList.get(counter + 1))) {
+                lines.add(new LineItem(Type.ADDED, secondList.get(counter)));
+                secondList.remove(counter);
+            }
+
+        }
+    }
+
 }
