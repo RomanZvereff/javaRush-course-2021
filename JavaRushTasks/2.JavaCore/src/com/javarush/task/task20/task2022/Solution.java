@@ -8,7 +8,7 @@ import java.io.*;
 
 public class Solution implements Serializable, AutoCloseable {
     private transient FileOutputStream stream;
-    private String fileName;
+    private final String fileName;
 
     public Solution(String fileName) throws FileNotFoundException {
         this.fileName = fileName;
